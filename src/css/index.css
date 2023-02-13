@@ -1,0 +1,103 @@
+.inicio{
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+}
+
+.flecha img{
+    margin-top: 10rem;
+    width: 5rem;
+}
+
+.text-img p{
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.telefonia{
+    background-color: #151617;
+    color: white;
+    padding: 4rem 0rem;
+}
+
+.telefonia h3{
+    text-align: left;
+}
+
+.telefonia a{
+    text-decoration: none;
+    color: white;
+}
+
+.telefonia button{
+    border: white 2px solid;
+}
+
+.cercle div{
+    background-image: linear-gradient(153deg, blueviolet 0%, #645a88 95%);
+    border: 2px solid white;
+    border-radius: 50%;
+    padding: 2rem 5rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+    padding-left: 1.5rem;
+}
+
+
+.cercle h3{
+    width: 5rem;
+    text-align: center;
+}
+
+.ofertes img{
+    width: 20rem;
+    height: 15rem;
+    border: 2px solid black;
+    padding: 2rem;
+}
+
+.ofertes span{
+    font-size: 2rem;
+    margin-left: 2rem;
+    color: blueviolet;
+}
+
+.ofertes h3{
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.ofertes{
+    padding-top: 2rem;
+}
+
+.ofertes button{
+    margin-top: 4rem;
+}
+
+h2{
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+
+main{
+    text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .inicio img{
+        width: 15rem;
+    }
+
+    .flecha img{
+        width: 2rem;
+        margin-top: 0;
+    }
+
+    .cercle h3{
+        margin-left: 4rem;
+    }
+}
