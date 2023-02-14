@@ -2,9 +2,9 @@ import React from 'react'
 
 export default function Nav() {
   return (
-    <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
+    <div className="container-fluid">
+            <div className="row">
+                <div className="col-12">
                     <a href="index.html">HOME</a>
                     <a href="reparacions.html">REPARACIONS</a>
                     <a href="tenda.html">TENDA</a>
