@@ -4,7 +4,7 @@ import Error404 from './components/error404';
 import Footer from './components/footer';
 import Home from './components/home';
 import Nav from './components/nav'
-
+import './App.css'
 
 
 function App() {
