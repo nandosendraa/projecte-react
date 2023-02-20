@@ -7,10 +7,10 @@ export default function Reparacions() {
     const [reparaciones, setReparaciones] = useState([]);
 
     const obtenerReparaciones = () => {
-        fetch('api/api/reparations')
+        fetch('http://api/api/reparations')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                console.log(data["hydra:member"]);
                 //setReparaciones(data.resultado);
             })
     }
