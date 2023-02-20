@@ -1,0 +1,39 @@
+* {
+    font-family: 'Noto Sans', sans-serif;
+}
+.morat{
+    background-color: blueviolet !important;
+    border-color: blueviolet !important; 
+}
+
+.titol img{
+    width: 14rem;
+}
+
+.esquerre img{
+    width: 1.5rem;
+}
+
+.social img{
+    width: 2rem;
+}
+
+.icono{
+    width: 1.5rem !important;
+}
+
+a:hover{
+    color: blueviolet !important;
+}
+
+.boto:hover{
+    color: blueviolet !important;
+    background-color: white !important;
+}
+
+img{
+    width: 3rem;
+}
+footer img{
+    width: 20rem;
+}

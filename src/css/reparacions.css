@@ -1,0 +1,92 @@
+h2{
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 1rem;
+}
+
+.titol-rep h3{
+    margin-bottom: 2rem;
+    color: blueviolet;
+    font-size: 1.8rem;
+    border-bottom: 2px solid blueviolet;
+}
+
+.detalls p{
+    margin-left: 18rem;
+    margin-top: 1rem;
+}
+
+.descripcio p{
+    line-height: 2.5rem;
+}
+
+.fila{
+    border-bottom: 2px solid black;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.ultima{
+    border-bottom: 0;
+}
+
+.paginador span{
+    background-color: rgb(114, 114, 114);
+    padding: 0.2rem;
+}
+
+.paginador{
+    display: inline;
+    margin-top: 2rem;
+    text-align: center;
+}
+.paginador p{
+    word-spacing: 3rem;
+}
+
+.paginador img{
+    width: 1rem;
+}
+
+.cercador input{
+    border: 2px solid black;
+    border-radius: 1rem;
+    width: 70.5rem;
+    height: 2.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    padding-right: 5rem;
+    background-image: url(../img/busqueda.png);
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position-y: 0.35rem;
+    background-position-x: 67.3rem;
+}
+
+.diagnostic{
+    background-color: rgb(255, 130, 130);
+}
+
+.reparacio{
+    background-color: rgb(255, 255, 122);
+}
+
+.arreplegar{
+    background-color: rgb(117, 255, 117);
+}
+
+.entregat {
+    background-color: rgb(196, 132, 255);
+}
+
+@media only screen and (max-width: 767px) {
+    .detalls p{
+        margin-left: 0rem;
+        margin-top: 1rem;
+    }
+
+    .cercador input{
+        width: 21.5rem;
+        background-position-x: 19rem;
+    }
+}

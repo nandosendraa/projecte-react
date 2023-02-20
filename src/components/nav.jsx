@@ -6,32 +6,32 @@ export default function Nav() {
     <div className="row text-center">
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="index.html">HOME</a>
+                <a className="text-decoration-none text-white fw-bold" href="/">HOME</a>
             </div>
         </div>
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="reparacions.html">REPARACIONS</a>
+                <a className="text-decoration-none text-white fw-bold" href="reparacions">REPARACIONS</a>
             </div>
         </div>
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="tenda.html">TENDA</a>
+                <a className="text-decoration-none text-white fw-bold" href="tenda">TENDA</a>
             </div>
         </div>
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="quisom.html">QUI SOM?</a>
+                <a className="text-decoration-none text-white fw-bold" href="quisom">QUI SOM?</a>
             </div>
         </div>
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="valoracions.html">VALORACIONS</a>
+                <a className="text-decoration-none text-white fw-bold" href="valoracions">VALORACIONS</a>
             </div>
         </div>
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="contacte.html">CONTACTE</a>
+                <a className="text-decoration-none text-white fw-bold" href="contacte">CONTACTE</a>
             </div>
         </div>
     </div>

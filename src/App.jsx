@@ -4,6 +4,8 @@ import Error404 from './components/error404';
 import Footer from './components/footer';
 import Home from './components/home';
 import Nav from './components/nav'
+import Reparacions from './components/reparacions';
+import Serveis from './components/serveis';
 import './App.css'
 
 
@@ -14,6 +16,8 @@ function App() {
       <Nav />
       <Routes>
         <Route path='/' element={<Home/>} />
+        <Route path='/reparacions' element={<Reparacions/>} />
+        <Route path='/serveis' element={<Serveis/>} />
         <Route path='/404' element={<Error404/>}/>
         <Route path='*' element={<Error404/>}/>
       </Routes>

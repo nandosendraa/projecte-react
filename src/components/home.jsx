@@ -1,5 +1,7 @@
 import React from 'react';
-import '../css/index.css'
+import '../css/index.css';
+import { importAll } from './images';
+const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
 
 export default function Home() {
   return (
@@ -7,13 +9,13 @@ export default function Home() {
         <div className="container inicio">
             <div className="row">
                 <div className="col-2 flecha">
-                    <img src="img/flecha-izquierda.png" alt="reparacion1" />
+                    <img src={images['flecha-izquierda.png']} alt="reparacion1" />
                 </div>
                 <div className="col-8">
-                    <img src="img/imagen_reparacion_1.jpg" alt="reparacion1" />
+                    <img className='w-100' src={images['imagen_reparacion_1.jpg']} alt="reparacion1" />
                 </div>
                 <div className="col-2 flecha">
-                    <img src="img/flecha-correcta.png" alt="reparacion1" />
+                    <img src={images['flecha-correcta.png']} alt="reparacion1" />
                 </div>
             </div>
             <div className="row">
@@ -27,7 +29,7 @@ export default function Home() {
             </div>
             <div className="row">
                 <div className="col-12 text-img">
-                    <button type="button" onClick="location.href ='serveis.html'">Mes Serveis</button>
+                    <button type="button" onClick="location.href ='serveis'">Mes Serveis</button>
                 </div>
             </div>
         </div>
@@ -69,7 +71,7 @@ export default function Home() {
              </div>                     
             <div className="row">
                 <div className="col-12">
-                    <button type="button" onClick="location.href ='tarifes.html'">Mes Informacio</button>
+                    <button type="button" onClick="location.href ='tarifes'">Mes Informacio</button>
                 </div>
             </div>
         </div>
@@ -80,19 +82,19 @@ export default function Home() {
             <div className="row">
                 <div className="col-5">
                     <h3>OFERTA MES RECOMANADA</h3>
-                    <a href="oferta.html"><img src="img/oferta_recomana.jpg" alt="recomana" /></a>
+                    <a href="oferta"><img src={images['oferta_recomana.jpg']} alt="recomana" /></a>
                     <p>ANTES : 299€ <span>ARA : 219€</span></p>
                 </div>
                 <div className="col-2"></div>
                 <div className="col-5">
                     <h3>OFERTA TOP</h3>
-                    <a href="oferta.html"><img src="img/oferta_top.jpg" alt="recomana" /></a>
+                    <a href="oferta"><img src={images['oferta_top.jpg']} alt="recomana" /></a>
                     <p>ANTES : 79€ <span>ARA : 54€</span></p>
                 </div>
             </div>
             <div className="row">
                 <div className="col-12">
-                    <button type="button" onClick="location.href ='ofertes.html'">Mes Ofertes</button>
+                    <button type="button" onClick="location.href ='ofertes'">Mes Ofertes</button>
                 </div>
             </div>
         </div>
