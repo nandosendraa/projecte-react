@@ -2,6 +2,7 @@ import React from 'react'
 
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
@@ -9,6 +10,8 @@ export default function Login() {
         user: Yup.string().required('Camp obligatori'),
         password: Yup.string().min(4,'Contrasenya masa curta').max(20,'Contrasenya masa llarga').required('Camp obligatori')
     })
+
+    const navigate = useNavigate();
 
     const formiknando = useFormik({
         initialValues: {user:'', password:''},
@@ -27,8 +30,8 @@ export default function Login() {
           })
             .then((response) => response.json())
             .then((data) => {
-              console.log(data.token);
-            
+              localStorage.setItem('token',data.token);
+              navigate('/');
             })
             .catch((error) => {
               console.error('Error:', error);
