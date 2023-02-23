@@ -1,22 +1,47 @@
 import React, { useState, useEffect } from 'react'
 import '../css/reparacions.css';
 import { importAll } from './images';
+import { useNavigate } from "react-router-dom";
 const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
+
 
 export default function Reparacions() {
     const [reparaciones, setReparaciones] = useState([]);
+    const [user, setUser] = useState([]);
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [id, setId] = useState(localStorage.getItem('userId'));
+    const navigate = useNavigate()
 
-    const obtenerReparaciones = () => {
-        fetch('http://api/api/reparations')
+    const obtenerUsuario  = () => {
+        if(token == null){
+            navigate('/login');
+        }
+        fetch('http://api/api/users/'+id, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer '+token,
+              'Content-Type': 'application/json',
+            },
+          })
             .then(response => response.json())
             .then(data => {
-                console.log(data["hydra:member"]);
-                //setReparaciones(data.resultado);
+                setUser(data);
+                obtenerReparaciones();
             })
     }
     useEffect(() => {
-        obtenerReparaciones();
+        obtenerUsuario();
     }, [])
+
+    const obtenerReparaciones = () => {
+        if (user.role == 'ROLE_USER'){
+            console.log(user.reparations);
+        }
+        else if (user.role == 'ROLE_WORKER'){
+            console.log(user.repairs);
+        }
+    }
+
     return (
         <main>
         <div className="container">

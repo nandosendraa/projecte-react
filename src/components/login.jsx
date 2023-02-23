@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-
     const loginSchema = Yup.object().shape({
         user: Yup.string().required('Camp obligatori'),
         password: Yup.string().min(4,'Contrasenya masa curta').max(20,'Contrasenya masa llarga').required('Camp obligatori')
@@ -30,7 +29,9 @@ export default function Login() {
           })
             .then((response) => response.json())
             .then((data) => {
+              console.log(data.data.id);
               localStorage.setItem('token',data.token);
+              localStorage.setItem('userId',data.data.id);
               navigate('/');
             })
             .catch((error) => {
