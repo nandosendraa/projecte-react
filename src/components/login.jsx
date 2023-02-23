@@ -1,48 +1,79 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Button, Form as BootstrapForm } from "react-bootstrap";
+import React from 'react'
 
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 
-const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Correo electrónico inválido").required("Correo electrónico requerido"),
-  password: Yup.string().required("Contraseña requerida"),
-});
+export default function Login() {
 
-const LoginForm = () => {
-  const initialValues = { email: "", password: "" };
+    const loginSchema = Yup.object().shape({
+        user: Yup.string().required('Camp obligatori'),
+        password: Yup.string().min(4,'Contrasenya masa curta').max(20,'Contrasenya masa llarga').required('Camp obligatori')
+    })
 
-  const handleSubmit = {
-
-  };
+    const formiknando = useFormik({
+        initialValues: {user:'', password:''},
+        
+        onSubmit: (values) =>{
+          const data ={
+            "username": values.user,
+            "password": values.password
+        }
+          fetch('http://api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data.token);
+            
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        },
+        validationSchema: loginSchema 
+        })
+    
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={LoginSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form>
-          <BootstrapForm.Group controlId="formBasicEmail">
-            <BootstrapForm.Label>Correo electrónico</BootstrapForm.Label>
-            <Field type="email" name="email" className="form-control" />
-            <ErrorMessage name="email" component="div" className="error" />
-          </BootstrapForm.Group>
-
-          <BootstrapForm.Group controlId="formBasicPassword">
-            <BootstrapForm.Label>Contraseña</BootstrapForm.Label>
-            <Field type="password" name="password" className="form-control" />
-            <ErrorMessage name="password" component="div" className="error" />
-          </BootstrapForm.Group>
-
-          <Button variant="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
-          </Button>
-        </Form>
-      )}
-    </Formik>
-  );
-};
-
-export default LoginForm;
+    <div className='contanier-fluid'>
+            <h1>Login</h1>
+            <form onSubmit={formiknando.handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor='user'>Usuari</label>
+                    <input 
+                    type="text" 
+                    className="form-control" 
+                    name="user" 
+                    value={formiknando.values.user}
+                    onChange={formiknando.handleChange}
+                    onBlur={formiknando.handleBlur}
+                    placeholder="Introduir usuari" />
+                    {formiknando.touched.user && formiknando.errors.user ?
+                    (<div className='text-danger'>{formiknando.errors.user}</div>): null}
+                </div>
+                <div className="form-group">
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="password">Contrasenya</label>
+                            <input 
+                            type="password" 
+                            className="form-control" 
+                            name="password" 
+                            value={formiknando.values.password}
+                            onChange={formiknando.handleChange}
+                            onBlur={formiknando.handleBlur}
+                            placeholder="Contrasenya" />
+                            {formiknando.touched.password && formiknando.errors.password ?
+                            (<div className='text-danger'>{formiknando.errors.password}</div>): null}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="enviar" className="mt-2 btn btn-primary">Accedir</button>
+            </form>
+        </div>
+  )
+}
