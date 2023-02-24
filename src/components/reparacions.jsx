@@ -40,22 +40,6 @@ export default function Reparacions() {
         else if (user.role === 'ROLE_WORKER') {
             setReparaciones([...user.repairs]);
         }
-        prepararAtributos();
-    }
-
-    const prepararAtributos = () => {
-        reparaciones.map((item, ind) => {
-            if (item.status === 'diagnostic') {
-                setEstat([...'EN DIAGNOSTIC']);
-            } else if (item.status === 'entregat') {
-                setEstat([...'ENTREGAT']);
-            } else if (item.status === 'llest') {
-                setEstat([...'LLEST PER A ARREPLEGAR']);
-            } else if (item.status === 'reparacio') {
-                setEstat([...'EN REPARACIO']);
-            }
-            setFecha([...new Date(item.date)])
-        })
     }
 
 
@@ -64,16 +48,11 @@ return (
         <div className="container">
             <div className="row">
                 <div className="col-12">
-                    <h2>REPARACIONS </h2>
+                    <h2>REPARACIONS</h2>
                 </div>
             </div>
         </div>
         <div className="container">
-            <div className="row">
-                <div className="col-12 cercador">
-                    <input type="text" placeholder=" INTRODUEIX NOM O NUMERO DE REPARACIÓ" />
-                </div>
-            </div>
         </div>
         {reparaciones.map((item, ind) => {
             return (
@@ -92,8 +71,8 @@ return (
                         </div>
                         <div className="col-6 detalls">
                             <p><label>PRODUCTE:</label> {item.name}</p>
-                            <p className="reparacio"><label>ESTAT: </label>{estat[ind]}</p>
-                            <p><label>FECHA PREVISTA:</label> {fecha[ind]}</p>
+                            <p className="reparacio"><label>ESTAT: </label> {item.status}</p>
+                            <p><label>FECHA PREVISTA:</label> {item.date}</p>
                         </div>
                     </div>
                 </div>
