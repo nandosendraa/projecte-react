@@ -7,6 +7,7 @@ import Nav from './components/nav'
 import Reparacions from './components/reparacions';
 import Serveis from './components/serveis';
 import Login from './components/login';
+import Logout from './components/logout';
 import './App.css'
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/reparacions' element={<Reparacions/>} />
         <Route path='/serveis' element={<Serveis/>} />
         <Route path='/login' element={<Login/>}/>
+        <Route path='/logout' element={<Logout/>}/>
         <Route path='/404' element={<Error404/>}/>
         <Route path='*' element={<Error404/>}/>
       </Routes>

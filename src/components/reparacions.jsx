@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import '../css/reparacions.css';
 import { importAll } from './images';
 import { Button, Modal } from 'react-bootstrap'
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
 
@@ -10,9 +12,12 @@ export default function Reparacions() {
     let boto = '';
     const [reparaciones, setReparaciones] = useState([]);
     const [rol, setRol] = useState('');
+    const [user,setUser] = useState([]);
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [id, setId] = useState(localStorage.getItem('userId'));
     const navigate = useNavigate()
+    const [show, setShow] = useState(false);
+    const [typeModal, setTypeModal] = useState('insertar');
 
     const obtenerUsuario = async function () {
         if (token == null) {
@@ -29,6 +34,17 @@ export default function Reparacions() {
         obtenerReparaciones(data);
 
     }
+    
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const reparationsSchema = Yup.object().shape({
+        name: Yup.string().min(4, 'Massa curt').max(80, 'Massa llarg').required('Camp obligatori'),
+        status: Yup.string().min(4, 'Massa curt').max(80, 'Massa llarg').required('Camp obligatori'),
+        description: Yup.string().min(4, 'Massa curt').max(80, 'Massa llarg').required('Camp obligatori'),
+        date: Yup.date().required('Camp obligatori'),
+
+    })
 
     const totesReparacions = async function () {
         if (token == null) {
@@ -42,25 +58,46 @@ export default function Reparacions() {
             },
         })
         const data = await response.json();
+        console.log(data);
         setReparaciones(data['hydra:member'])
 
     }
+    
 
     useEffect(() => {
         obtenerUsuario()
     }, [])
 
-    const inicializeModal=(type,item)=>{
-      /*  setTypeModal(type);
-        if(type==='insertar'){
-            formiknando.values.nombre='';
-            formiknando.values.año_nacimiento=0;
-        }else{
-            formiknando.values._id= item._id
-            formiknando.values.nombre=item.nombre;
-            formiknando.values.año_nacimiento=item.año_nacimiento;
+    const formik = useFormik({
+        initialValues: { name: '', status: '', description: '', date: ''},
+        validationSchema: reparationsSchema,
+        onSubmit: (values) => {
+            console.log(values);
+            if (typeModal === 'Alta') {
+                createReparation();
+            }
+            else {
+                updateReparation()
+            }
+            handleClose();
         }
-        handleShow();*/
+    });
+
+    const inicializeModal=(type,item)=>{
+        setTypeModal(type);
+        if(type==='Alta'){
+            formik.values.name='';
+            formik.values.status='';
+            formik.values.description='';
+            formik.values.date='';
+        }else{
+            formik.values.id=item.id
+            formik.values.name=item.name;
+            formik.values.status=item.status;
+            formik.values.description=item.description;
+            formik.values.date=item.date;
+        }
+        handleShow();
     }
 
     const obtenerReparaciones = (user) => {
@@ -78,22 +115,77 @@ export default function Reparacions() {
         }
     }
     const handleDelete =(id,ind) =>{
-        /*fetch('https://serverred.es/api/autores/'+id, {
+       fetch('http://api/api/reparations/'+id, {
               method: 'DELETE',
               headers: {
+                'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json',
-              }
+            },
             })
               .then((response) => response.json())
               .then((data) => {
-                autores.splice(ind,1);
-                setAutores([...autores])
+                reparaciones.splice(ind,1);
+                setReparaciones([...reparaciones])
                 console.log(data);
               })
               .catch(error=>{
                 console.error('Error:', error);
-              })*/
+              })
 
+    }
+
+    const createReparation = () => {
+        console.log(formik)
+        const body = {
+            name: formik.values.name,
+            description: formik.values.description,
+            date: formik.values.date,
+            status: formik.values.status
+        }
+
+        fetch('http://api/api/reparations', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formik.values),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                setReparaciones([...reparaciones, data.resultado]); // Guarda en la array (al modificarse se renderiza automáticamente en local)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+    const updateReparation = () => {
+        console.log(formik)
+        const body = {
+            name: formik.values.name,
+            description: formik.values.description,
+            date: formik.values.date,
+            status: formik.values.status
+        }
+
+        fetch('http://api/api/reparations/'+formik.values.id, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formik.values),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                setReparaciones([...reparaciones, data.resultado]); // Guarda en la array (al modificarse se renderiza automáticamente en local)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
 
@@ -105,7 +197,7 @@ return (
                     <h2>REPARACIONS</h2>
                 </div>
             </div>
-            {rol==='admin'?<Button onClick={()=> inicializeModal("insertar")} className='btn btn-info'>NOVA REPARACIÓ</Button>:""}
+            {rol==='admin'?<Button onClick={()=> inicializeModal("Alta")} className='btn btn-info'>NOVA REPARACIÓ</Button>:""}
         </div>
         <div className="container">
         </div>
@@ -136,6 +228,61 @@ return (
                 </div>
             )
         })}
+        <div className="modal show" style={{ display: 'block', position: 'initial' }}>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{typeModal} Reparacio</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor='name'>Nom</label>
+                                <input type="text" className="form-control" name="name" placeholder="Nom" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} required />
+                                {formik.touched.name && formik.errors.name ? (<div className='text-danger'>{formik.errors.name}</div>) : null}
+                            </div>
+                            <div className="form-group">
+                                <div className="row">
+                                    <div className="col">
+                                        <label htmlFor='description'>Descripcio</label>
+                                        <input type="text" className="form-control" name="description" placeholder="Descripcio" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.description} required />
+                                        {formik.touched.description && formik.errors.description ? (<div className='text-danger'>{formik.errors.description}</div>) : null}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="row">
+                                    <div className="col">
+                                        <label htmlFor='date'>Data</label>
+                                        <input type="date" className="form-control" name="date" onChange={formik.handleChange} onBlur={formik.handleBlur} value={new Date(formik.values.date)} required />
+                                        {formik.touched.date && formik.errors.date ? (<div className='text-danger'>{formik.errors.date}</div>) : null}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="row">
+                                    <div className="col">
+                                        <label htmlFor='status'>Estat</label>
+                                        <select type="text" className="form-control" name="status" placeholder="Estat" onChange={formik.handleChange} onBlur={formik.handleBlur} required >
+                                            <option value='EN REPARACIO'>EN REPARACIO</option>
+                                            <option value='EN REPARACIO'>EN DIAGNOSTIC</option>
+                                            <option value='EN REPARACIO'>LLEST PER A ARREPLEGAR</option>
+                                            <option value='EN REPARACIO'>ENTREGAT</option>
+                                        </select>
+                                        {formik.touched.status && formik.errors.status ? (<div className='text-danger'>{formik.errors.status}</div>) : null}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => handleClose()}>Close</Button>
+                        <Button type='submit' variant="primary" onClick={formik.handleSubmit}>{typeModal === 'Alta' ? 'Añadir reparacio' : 'Actualizar reparacio'}</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
     </main>
+    
 )
 }
