@@ -5,9 +5,10 @@ import Footer from './components/footer';
 import Home from './components/home';
 import Nav from './components/nav'
 import Reparacions from './components/reparacions';
-import Serveis from './components/serveis';
+import Services from './components/services';
 import Login from './components/login';
 import Logout from './components/logout';
+import Tenda from './components/tenda';
 import './App.css'
 
 
@@ -19,8 +20,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/reparacions' element={<Reparacions/>} />
-        <Route path='/serveis' element={<Serveis/>} />
+        <Route path='/services' element={<Services/>} />
         <Route path='/login' element={<Login/>}/>
+        <Route path='/tenda' element={<Tenda/>}/>
         <Route path='/logout' element={<Logout/>}/>
         <Route path='/404' element={<Error404/>}/>
         <Route path='*' element={<Error404/>}/>

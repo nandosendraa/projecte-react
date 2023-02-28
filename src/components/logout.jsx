@@ -1,12 +1,22 @@
 import React from 'react';
 import { importAll } from './images';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
 
 export default function Logout() {
-    localStorage.clear();
-    Navigate('/');
+    const navigate = useNavigate();
+    const tancar = () => {
+        localStorage.clear()
+        navigate('/')
+    }
+    const reparations = () => {
+        navigate('/reparacions')
+    }
     return (
-        <h1>S'esta tancant la sessio</h1>
+        <div>
+            <h1>Vols tancar la sessio?</h1>
+            <button className='btn btn-danger' onClick={()=> tancar()}>SI</button>
+            <button className='btn btn-primary' onClick={()=> reparations()}>NO</button>
+        </div>
     )
 }

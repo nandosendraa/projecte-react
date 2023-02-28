@@ -1,10 +1,10 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const [error, setError] = useState();
     const loginSchema = Yup.object().shape({
         user: Yup.string().required('Camp obligatori'),
         password: Yup.string().min(4,'Contrasenya masa curta').max(20,'Contrasenya masa llarga').required('Camp obligatori')
@@ -20,7 +20,7 @@ export default function Login() {
             "username": values.user,
             "password": values.password
         }
-          fetch('http://api/login', {
+          fetch('https://api.09fernando.daw.iesevalorpego.es/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -29,6 +29,8 @@ export default function Login() {
           })
             .then((response) => response.json())
             .then((data) => {
+              if(data.message)
+                setError(data.message)
               console.log(data.data.id);
               localStorage.setItem('token',data.token);
               localStorage.setItem('userId',data.data.id);
@@ -45,6 +47,7 @@ export default function Login() {
   return (
     <div className='contanier-fluid'>
             <h1>Login</h1>
+            {error?<p>{error}</p>:""}
             <form onSubmit={formiknando.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor='user'>Usuari</label>

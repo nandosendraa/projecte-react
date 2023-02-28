@@ -5,6 +5,7 @@ const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/))
   
 export default function Header() {
     const [token, setToken] = useState(localStorage.getItem('token'));
+    
     return (
         
         <div className="container-fluid pt-xxl-3 pb-xxl-4 morat">

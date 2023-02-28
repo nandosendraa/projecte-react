@@ -1,0 +1,127 @@
+
+
+.cercador input{
+    border: 2px solid black;
+    border-radius: 1rem;
+    width: 70.5rem;
+    height: 2.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    padding-right: 5rem;
+    background-image: url(../img/busqueda.png);
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position-y: 0.35rem;
+    background-position-x: 67.3rem;
+    
+}
+
+.titolCist{
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+.total{
+    margin-top: 1rem;
+    font-size: 2rem;
+    text-align: right;
+}
+
+.producte{
+    margin-top: 2rem;
+    margin-left: 1.9rem;
+    background-color: rgb(223, 223, 223);
+    border: 2px solid rgba(128, 128, 128, 0.452);
+    border-radius: 1rem;
+}
+
+.reservar{
+    margin-bottom: 1rem;
+}
+
+.borrar{
+    margin-left: 24.8rem;
+}
+
+.article img{
+    width: 6rem;
+    float: left;
+    border: 2px solid black;
+}
+
+.article{
+    margin-top: 1rem;
+}
+
+.cesta{
+    background-color: rgb(223, 223, 223);
+    border: 2px solid rgba(128, 128, 128, 0.452);
+    border-radius: 1rem;
+}
+
+.producte img{
+    margin-top: 1rem;
+    border: 2px solid blueviolet;
+    width: 15.7rem;
+    height: 15.7rem;
+}
+
+.producte button{
+    margin-bottom: 1rem;
+}
+
+.carro{
+    float: left;
+}
+
+.titolArticle{
+    margin-left: 7rem;
+}
+
+.preuCist{
+    margin-top: 2rem;
+    text-align: right;
+    font-size: 1rem;
+}
+
+.preu{
+    text-align: right;
+    font-size: 2rem;
+    color: blueviolet;
+}
+
+.descripcio{
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.paginador span{
+    background-color: rgb(114, 114, 114);
+    padding: 0.2rem;
+}
+
+.paginador{
+    display: inline;
+    margin-top: 2rem;
+    text-align: center;
+}
+.paginador p{
+    word-spacing: 3rem;
+}
+
+.paginador img{
+    width: 1rem;
+}
+
+@media only screen and (max-width: 767px) {
+    .cercador input{
+        width: 21.5rem;
+        background-position-x: 19rem;
+    }
+
+    .producte{
+        margin: 0;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+}
