@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import '../css/reparacions.css';
-import { importAll } from './images';
+//import { importAll } from './images';
 import { Button, Modal } from 'react-bootstrap'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
-const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
+//const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
 
 
 export default function Reparacions() {
-    let boto = '';
     const [reparaciones, setReparaciones] = useState([]);
     const [rol, setRol] = useState('');
-    const [user,setUser] = useState([]);
-    const [token, setToken] = useState(localStorage.getItem('token'));
-    const [id, setId] = useState(localStorage.getItem('userId'));
+    const [token] = useState(localStorage.getItem('token'));
+    const [id] = useState(localStorage.getItem('userId'));
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [typeModal, setTypeModal] = useState('insertar');
@@ -47,7 +45,6 @@ export default function Reparacions() {
             },
         })
         const data = await response.json();
-        setUser(data);
 
     }
     
@@ -230,7 +227,7 @@ return (
 
         {reparaciones.map((item, ind) => {
             return (
-                <div className="container">
+                <div key={ind} className="container">
                     <div className="row">
                         <div className="col-6 titol-rep">
                             <h3>REPARACIO {ind + 1}</h3>

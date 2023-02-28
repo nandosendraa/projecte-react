@@ -1,11 +1,10 @@
 import React from 'react';
 import '../css/index.css';
 import { importAll } from './images';
-import { useNavigate } from "react-router-dom";
 const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
 
 export default function Home() {
-    const navigate = useNavigate();
+
   return (
     <main>
         <div className="container inicio">

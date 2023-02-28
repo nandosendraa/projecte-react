@@ -1,6 +1,4 @@
 import React from 'react';
-import { importAll } from './images';
-const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
 
 export default function Footer() {
     return (

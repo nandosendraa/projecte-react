@@ -4,7 +4,7 @@ import { importAll } from './images';
 const images = importAll(require.context('../img', false, /\.(png|jpe?g|svg)$/));
   
 export default function Header() {
-    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [token] = useState(localStorage.getItem('token'));
     
     return (
         

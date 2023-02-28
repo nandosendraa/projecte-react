@@ -11,12 +11,12 @@ export default function Nav() {
         </div>
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="reparacions">REPARACIONS</a>
+                <a className="text-decoration-none text-white fw-bold" href="/reparacions">REPARACIONS</a>
             </div>
         </div>
         <div className="col-2">
             <div>
-                <a className="text-decoration-none text-white fw-bold" href="tenda">TENDA</a>
+                <a className="text-decoration-none text-white fw-bold" href="/tenda">TENDA</a>
             </div>
         </div>
     </div>
